@@ -1,0 +1,56 @@
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.jonytitan.lechapyn.R;
+
+import java.util.ArrayList;
+
+public class AdapterListRecetas extends BaseAdapter{
+
+    private Context context;
+    private ArrayList<Integer> imagen;
+    private ArrayList<String> titulo_receta;
+    private ArrayList<String> tiempo_comida;
+
+    public AdapterListRecetas(Context context, ArrayList<Integer> imagen, ArrayList<String> titulo_receta, ArrayList<String> tiempo_comida){
+        this.context = context;
+        this.imagen = imagen;
+        this.titulo_receta = titulo_receta;
+        this.tiempo_comida = tiempo_comida;
+    }
+
+    @Override
+    public int getCount() {
+        return tiempo_comida.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return titulo_receta.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if(convertView == null){
+            convertView = View.inflate(context, R.layout.listview_design ,null);
+        }
+        ImageView image = (ImageView) convertView.findViewById(R.id.img_receta);
+        TextView texto1 = (TextView) convertView.findViewById(R.id.nom_receta);
+        TextView text2 = (TextView) convertView.findViewById(R.id.nom_tiempo);
+
+        image.setImageResource(imagen.get(position));
+        texto1.setText(titulo_receta.get(position));
+        text2.setText(tiempo_comida.get(position));
+
+        return convertView;
+    }
+}
